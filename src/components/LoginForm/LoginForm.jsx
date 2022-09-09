@@ -3,31 +3,19 @@ import './loginForm.scss';
 import {OwnID} from "@ownid/react";
 import {useNavigate} from "react-router-dom";
 import Header from "../Header/Header";
-import {loginUser} from "../../services/httpRequests";
-import {toast} from "react-toastify";
-
+import {loginUser,gigyaEventListener} from "../../services/httpRequests";
 
 function LoginForm() {
     const emailField = useRef(null);
     const passwordField = useRef(null);
     let navigate = useNavigate();
 
+    gigyaEventListener();
+
     function onSubmit(event) {
         event.preventDefault();
         //Call your existing registration logic in the backend
-        return login({loginId: emailField.current.value, password: passwordField.current.value});
-    }
-
-    function login(userData) {
-        loginUser(userData)
-            .then(data => {
-                if (data.logged) {
-                    navigate('/account');
-                } else {
-                    toast.error(data.error);
-                }
-            })
-            .catch(error => toast.error(error))
+        return loginUser({loginId: emailField.current.value, password: passwordField.current.value});
     }
 
     function onLogin(data) {

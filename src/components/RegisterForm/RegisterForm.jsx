@@ -4,39 +4,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import {OwnID} from "@ownid/react";
 import {useNavigate} from "react-router-dom";
 import Header from "../Header/Header";
-import {httpPostRequest, loginUser, registerUser} from "../../services/httpRequests";
-import {toast} from "react-toastify";
+import {registerUser,gigyaEventListener} from "../../services/httpRequests";
+
 
 function RegisterComponent() {
     const emailField = useRef(null);
     const passwordField = useRef(null);
-    const [ownIDData, setOwnIDData] = useState(null);
     let navigate = useNavigate();
 
-    // Stores ownIdData
-    function onRegister(ownIdData) {
-        //setOwnIDData(ownIdData);
-        console.log(ownIdData);
-    }
+    gigyaEventListener();
 
     function onSubmit(event,ownIdData) {
         event.preventDefault();
         //Call your existing registration logic in the backend
         const userData = {loginId: emailField.current.value, password: passwordField.current.value};
 
-        return register({...userData, ...{ownIdData: ownIdData}});
-    }
-
-    function register(userData) {
-
-        registerUser(userData).then((value) => {
-            debugger; 
-            console.log(value);
-
-          });
-          
-     
-
+        return registerUser(userData);
     }
 
     return (
@@ -54,7 +37,9 @@ function RegisterComponent() {
                        loginIdField={emailField}
                        passwordField={passwordField}
                        onError={(error) => console.error(error)}
-                       onRegister={onRegister}/>
+                       onLogin={(response) => console.log(response)}
+                       onRegister={(response) => console.log(response)}/>
+                       
             </form>
             <div className="custom-link" onClick={() => navigate('/login')}>
                 <div className="link-text">Already have an account?</div>

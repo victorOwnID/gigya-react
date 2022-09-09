@@ -1,10 +1,14 @@
 import './Account.scss';
 import React from "react";
 import Header from "../Header/Header";
-import {useNavigate} from "react-router-dom";
+import {logout,gigyaEventListener} from "../../services/httpRequests";
+
 
 function Account() {
-    let navigate = useNavigate();
+
+
+    gigyaEventListener();
+
     return (
         <>
             <Header/>
@@ -13,7 +17,7 @@ function Account() {
                     You are logged in
                 </div>
                 <div className="custom-link">
-                    <div onClick={() => navigate('../login')} className="link-text">Logout</div>
+                    <div onClick={logout} className="link-text">Logout</div>
                 </div>
             </div>
         </>

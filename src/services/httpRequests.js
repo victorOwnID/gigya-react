@@ -1,39 +1,50 @@
+import {toast} from "react-toastify";
 const API_URL = 'http://localhost:3002/'
 
 export function registerUser(bodyData) {
 
-    window.ownid.sdk.getOwnIDData("register").then((value) => {
-        bodyData.data = value.data;
-        bodyData.meta = value.metadata.dataField;
-        });
-
     window.gigya.accounts.initRegistration({callback:function(e){
-        window.gigya.accounts.register({regToken:e.regToken,email:bodyData.loginId,password:bodyData.password,data:{ownId:bodyData.data},finalizeRegistration:true, callback:function(ev){
-            debugger;
-            if(ev.errorCode === 0){
-                window.location = '/login';
+        window.gigya.accounts.register({regToken:e.regToken,email:bodyData.loginId,password:bodyData.password,finalizeRegistration:true, callback:function(ev){
 
+            if(ev.errorCode === 0){
+                //registration was correct
+                toast.done('User registered!')
+            }else{
+                //we print an error
+                toast.error(ev.errorMessage);
             }
         }})
     }})
   
 }
 
-export function loginUser(bodyData) {
-    debugger;
-    window.gigya.accounts.login({loginID:bodyData.loginId,password:bodyData.password,callback:function(ev){
-        if(ev.errorCode === 0){
+export function gigyaEventListener() {
+
+    window.gigya.accounts.addEventHandlers({
+        onLogin:function(ev){
+            //whenever there's a global login event, we redirect to the account
             window.location = '/account';
+        },
+        onLogout:function(ev){
+            //whenever there's a logout event, we redirect to the login
+            window.location = '/login';
         }
-    }});
+    });
+  
 }
 
-function  httpPostRequest(route,bodyData) {
-    return fetch(API_URL + route, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bodyData),
-    }).then(response => response.json());
+export function logout(){
+    window.gigya.accounts.logout();
+}
+
+export function loginUser(bodyData) {
+    window.gigya.accounts.login({loginID:bodyData.loginId,password:bodyData.password,callback:function(ev){
+        if(ev.errorCode === 0){
+            //registration was correct
+            toast.done('User logged in!')
+        }else{
+            //we print an error
+            toast.error(ev.errorMessage);
+        }
+    }});
 }
