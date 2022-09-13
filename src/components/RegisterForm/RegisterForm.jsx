@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import './registerForm.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import {OwnID} from "@ownid/react";
