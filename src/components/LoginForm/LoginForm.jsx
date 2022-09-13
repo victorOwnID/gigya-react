@@ -18,13 +18,6 @@ function LoginForm() {
         return loginUser({loginId: emailField.current.value, password: passwordField.current.value});
     }
 
-    function onLogin(data) {
-        //setting user session
-        localStorage.setItem('data', JSON.stringify({token: data.token}));
-        //redirecting user to the account page
-        navigate('/account')
-    }
-
     return (
         <>
             <Header/>
@@ -40,7 +33,7 @@ function LoginForm() {
                        passwordField={passwordField}
                        loginIdField={emailField}
                        onError={(error) => console.error(error)}
-                       onLogin={onLogin}/>
+                       onLogin={(response) => console.log(response)}/>
             </form>
             <div className="custom-link" onClick={() => navigate('/register')}>
                 <div className="link-text">Don't have an account?</div>
