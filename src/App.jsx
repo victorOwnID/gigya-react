@@ -23,7 +23,7 @@ function App() {
             <OwnIDInit config={{
                 appId: 'ogf2cul085biwq',
                 env: 'uat', // TODO: add your app id here from your OwnID console app (you can use your snippet) https://console.ownid.com/
-                sdk:'gigya'
+                sdk: 'https://cdn.uat.ownid.com/js/gigya.sdk.js'
             }}/>
             <Routes>
                 <Route
