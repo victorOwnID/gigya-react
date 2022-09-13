@@ -36,7 +36,7 @@ function LoginForm() {
                 <input ref={passwordField} type="password" name="password" placeholder="password" required/>
                 <button type="submit">Log In</button>
                 <OwnID type='login'
-                       options={{ variant: 'button-fingerprint', infoTooltip:true }}
+                       options={{ variant: 'button-fingerprint', infoTooltip:true, widgetPosition:'start', infoTooltipPosition:'bottom' }}
                        passwordField={passwordField}
                        loginIdField={emailField}
                        onError={(error) => console.error(error)}
