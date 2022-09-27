@@ -32,6 +32,7 @@ function LoginForm() {
                        options={{ variant: 'button-fingerprint', infoTooltip:true, widgetPosition:'start', infoTooltipPosition:'bottom' }}
                        passwordField={passwordField}
                        loginIdField={emailField}
+                       language='it'
                        onError={(error) => console.error(error)}
                        onLogin={(response) => console.log(response)}/>
             </form>
