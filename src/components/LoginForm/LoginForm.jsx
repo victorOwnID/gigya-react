@@ -34,7 +34,9 @@ function LoginForm() {
                        loginIdField={emailField}
                        language='it'
                        onError={(error) => console.error(error)}
-                       onLogin={(response) => console.log(response)}/>
+                       onLogin={(response) => console.log(response)}
+                       onBeforeLogin={(response) => console.log(response)}
+                       onMagicLink={(response) => console.log(response)}/>
             </form>
             <div className="custom-link" onClick={() => navigate('/register')}>
                 <div className="link-text">Don't have an account?</div>
