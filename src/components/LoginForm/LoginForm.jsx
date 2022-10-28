@@ -33,7 +33,7 @@ function LoginForm() {
                        passwordField={passwordField}
                        loginIdField={emailField}
                        language='it'
-                       onError={(error) => console.error(error)}
+                       onError={(error) => console.log(error)}
                        onLogin={(response) => console.log(response)}
                        onBeforeLogin={(response) => console.log(response)}
                        onMagicLink={(response) => console.log(response)}/>
